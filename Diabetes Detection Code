@@ -1,0 +1,62 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix
+from sklearn import svm
+#classification report
+from sklearn.metrics import classification_report
+from sklearn.preprocessing import StandardScaler
+import sklearn.datasets
+
+df = pd.read_csv('/content/diabetes6.csv')
+df.head()
+
+df.describe()
+df.isnull().sum()
+df.shape
+df['BMI']=df['BMI'].fillna(df['BMI'].mean())
+df.head()
+
+df.info()
+df.fillna(df.mean(),inplace=True)
+df.head()
+
+x=df.drop(columns='Outcome',axis=1)
+y=df['Outcome']
+print(x)
+print(y)
+
+std=StandardScaler()
+std.fit(x)
+x=std.transform(x)
+print(x)
+
+df['Outcome'].value_counts()
+df.groupby('Outcome').mean()
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,stratify=y,random_state=2)
+print(x_train.shape,x_test.shape,y_train.shape,y_test.shape)
+
+classifier =svm.SVC(kernel = 'linear')
+classifier.fit(x_train,y_train)
+
+x_train_accuracy =classifier.predict(x_train)
+training_data_accuracy =accuracy_score(x_train_accuracy,y_train)
+print("Accuracy score of Training data : ",training_data_accuracy)
+
+x_test_accuracy =classifier.predict(x_test)
+testing_data_accuracy =accuracy_score(x_test_accuracy,y_test)
+print("Accuracy score of Testing data : ",testing_data_accuracy)
+
+input_data = [4,0,137,40,35,168,43.1,2.288,33]
+input_data_as_numpy_array =np.asarray(input_data)
+input_data_reshaped=input_data_as_numpy_array.reshape(1,-1)
+std_data=std.transform(input_data_reshaped)
+print(std_data)
+prediction =classifier.predict(std_data)
+print(prediction)
+if(prediction[0]==0):
+  print("The person is not diabetic")
+else:
+  print("The person is diabetic")
