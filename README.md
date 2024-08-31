@@ -4,5 +4,4 @@
 3) Fake News Detection
 4) Plant Disease Detection
 
-# we train this machine learning models 
    
