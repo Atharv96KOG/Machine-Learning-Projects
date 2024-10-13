@@ -7,6 +7,6 @@
 6) credit Card Frud Detection
 7) Breast Cancer Prediction
 8) Advanced Cardio Cancer Prediction
-9) Image Processing of Cardio diseases ( cortories tumor detection Stenosis and Non-Stenosis)
+9) Image Processing of Cardio diseases ( cortories tumor detection Stenosis and Non-Stenosis) Image.ipnyb
 
    
